@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: springai-demo
+  datasource:
+    url: jdbc:postgresql://${gpuServer}:5432/langchain_db
+    username: langchain
+  ai:
+    openai:
+      base-url: http://${gpuServer}:9997
+      api-key: dummy-key
+      chat:
+        options:
+          model: qwen2-instruct
+      embedding:
+        options:
+          model: bge-m3
+#    vectorstore:
+#      pgvector:
+#        dimensions: 1024
+#        table-name: langchain_db
+#        distance-type: cosine_distance
+#        index-type: hnsw
+
+mybatis-plus:
+  global-config:
+    banner: false
