@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.springframework.core.io.Resource;
 
 import java.util.function.Function;
 
@@ -17,9 +18,14 @@ import java.util.function.Function;
 @Configuration
 public class ChatConfiguration {
 
+    @Value("classpath:/prompts/system.st")
+    private Resource systemPromptResource;
+
     @Bean
     public ChatClient xinferenceChatClient(ChatClient.Builder builder) {
-        return builder.build();
+        return builder
+            .defaultSystem(systemPromptResource)
+            .build();
     }
 
     @Bean("SearchWeather")
